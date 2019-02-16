@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ChatInput from './chatInput';
-
+import './chat.css';
 export default class ChatComponent extends Component {
   constructor(props) {
     super(props);
@@ -30,6 +30,9 @@ export default class ChatComponent extends Component {
   }
   checkGroup(user,group){
     let _h;
+    if(!group){
+        group = this.props.adminGroups;
+    }
     for(let i=0;i<group.members.length;i++){
         if(group.members[i].name == user.name){
             _h =true;
@@ -50,11 +53,19 @@ export default class ChatComponent extends Component {
     const {chats}=this.state;
     //  
     return (
-        <div className="row">
-            <div className="col-4">
-                side Panel
+        <div className="Chat-container">
+            <div className="Message-container">
+                <div className="col-12"><h3>Messages</h3></div>
+                {chats.map((chat_,index)=>{
+                    return (<div className="col-12" key={index}>
+                        <div className="alert alert-info no-margin" >{chat_.message}</div>
+                        <div className="alert-light-1">-{chat_.user.name}</div>
+                    </div>
+                    );
+                    })
+                }
             </div>
-            <div className="col-4">
+            <div className="Message-input">
                 <ChatInput
                     sendMessage={
                         (message)=>{
@@ -63,17 +74,7 @@ export default class ChatComponent extends Component {
                     }
                 />
             </div>
-            <div className="col-4">
-                <div className="row"><h3>Messages</h3></div>
-                {chats.map((chat_,index)=>{
-                    return (<div className="col-12" key={index}>
-                        <div className="alert alert-info" >{chat_.message}</div>
-                        <div className="alert-light">-{chat_.user.name}</div>
-                    </div>
-                    );
-                    })
-                }
-            </div>
+            
         </div>
     );
   }

@@ -20,7 +20,7 @@ class Layout extends Component {
     this.initSocket();
   }
 initSocket =()=>{
-    const socket = io("http://192.168.1.6:3231");
+    const socket = io("http://localhost:3231");
     socket.on('connect',()=>{
         console.log('Connected');
         
@@ -38,9 +38,11 @@ setUser = (user)=>{
 setGroup = (group)=>{
     console.log('in layout group is',group);
     if(group.length > 0){
-        this.setState({group});
+        const adminGroups = group;
         const admin =true;
-        this.setState({admin});
+        this.setState({adminGroups,admin});
+        //const admin =true;
+        //this.setState({admin});
     }else{
         this.setState({group});
     }
@@ -48,9 +50,13 @@ setGroup = (group)=>{
 }
 renderView(){
     const {socket}= this.state;
-    const {user, group}= this.state;
+    const {user, group, adminGroups}= this.state;
+    console.log('ad',adminGroups);
     if(this.state.admin){
-        return (<AdminChat user={user} group={group} socket={socket}/>)
+        let _view = adminGroups.map((_group,index)=>{
+            return (<div className="col-6"><ChatComponent user={user} group={adminGroups[index]} socket={socket}/></div>)
+        })
+        return (<div className="row"> {_view}</div>)
     }else{
         return(<ChatComponent user={user} group={group} socket={socket}/>);
     }

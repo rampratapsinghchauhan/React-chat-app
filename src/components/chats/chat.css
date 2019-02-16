@@ -1,0 +1,25 @@
+.Chat-container{
+    min-height: 100vh;
+
+}
+.Message-container{
+    height: calc(100vh - 55px);
+    overflow-y:scroll;
+    overflow-x: hidden;
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+}
+.Message-input{
+    height: 50px;
+}
+.no-margin{
+    margin-bottom: 0 !important;
+}
+.alert-light-1 {
+    color: #818182;
+    background-color: none;
+    text-align: right;
+}
+

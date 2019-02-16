@@ -10,13 +10,9 @@ class Login extends Component {
   }
   componentWillMount() {
     const { socket } = this.props;
-    //socket.on('message-sent', this.addMessageToChat(chat.id))
 	}
 
-  // addMessageToChat =(chat)=>{
-  //   console.log('this is messgae',chat);
-    
-  // }
+  
   handleChange =(e)=>{
     this.setState({nickname:e.target.value})
   }
@@ -26,8 +22,6 @@ class Login extends Component {
     socket.emit('VERIFY_USER', nickname, this.setUser)
   }
   setUser=({isUser,user, group})=>{
-    console.log('in set user');
-    console.log(isUser, user,group)
     if(isUser){
         //this.setError("User name is already taken")
         this.props.setUser(user)
@@ -46,9 +40,9 @@ class Login extends Component {
         <input className="form-control" onChange={this.handleChange}></input>
         <button className="btn btn-block btn-success" onClick={this.handleLogin}> Login</button>
         <div>
-          User login id : Ram or Sam for group 1 <br></br>
-          User login id : Jam or Tam for group 2
-          
+          User login id for group 1 : Ram or Sam for group 1 <br></br>
+          User login id for group 2: Jam or Tam for group 2 <br></br>
+          Admin user: Admin
         </div>
       </div>
     );

@@ -8,18 +8,20 @@ class AdminChat extends Component {
     this.state = {
     };
   }
-  renderViewForAdmin= (group,user,socket)=>{
-    let _view = group.map((_group,index)=>{
-        return (<ChatComponent key={index} user={user} group={group[index]} socket={socket}/>)
+  renderViewForAdmin= (user,adminGroups,socket)=>{
+    let _view = adminGroups.map((_group,index)=>{
+        return (<div key={index} className="col-6"><ChatComponent user={user} group={adminGroups[index]} adminGroups={adminGroups[index]} socket={socket}/></div>)
     })
-    return _view
+    return (<div className="row">{_view}</div>)
   }
 
   render() {
-      const {user,group,socket} = this.props;
+      const {user,adminGroups,socket} = this.props;
+      console.log('adin chat',this.props)
     return (
         //this.renderViewForAdmin(group,user,socket)
-        <ChatComponent user={user} group={group[0]} socket={socket}/>
+        <ChatComponent user={user} group={adminGroups[0]} socket={socket}/>
+        
     );
   }
 }
